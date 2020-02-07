@@ -16,48 +16,23 @@
   *
   ******************************************************************************
   */
-/* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
 I2C_HandleTypeDef hi2c1;
 
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_I2C1_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
 
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
 recive_buff[2]={0};
+
 void write_register(uint8_t register_pointer, uint16_t register_value)
 {
     uint8_t data[3];
@@ -78,7 +53,6 @@ void read_register(uint8_t register_pointer, uint8_t* receive_buffer)
     // receive the 2 x 8bit data into the receive buffer
     HAL_I2C_Master_Receive(&hi2c1, 0xA3, receive_buffer, 2, 500);
 }
-/* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
@@ -86,37 +60,25 @@ void read_register(uint8_t register_pointer, uint8_t* receive_buffer)
   */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
-
-  /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_I2C1_Init();
-  /* USER CODE BEGIN 2 */
-uint8_t data[3] = {1,2,3};
-uint8_t RX_data[3] = {0};
-uint8_t data1[3] = {4,5,6};
-uint8_t RX_data1[3] = {0};
 
-HAL_Delay(300);
+  uint8_t data[3] = {1,2,3};
+  uint8_t RX_data[3] = {0};
+  uint8_t data1[3] = {4,5,6};
+  uint8_t RX_data1[3] = {0};
+
+  HAL_Delay(300);
 
 //while(HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)0xa0,5,1000) != HAL_OK)
 //{
@@ -151,21 +113,11 @@ if (HAL_I2C_Mem_Read_IT(&hi2c1, (uint16_t)0xa1, 0x30, 1, RX_data1,3)!= HAL_OK)
 HAL_Delay(1000);
 
 
-
-
-  /* USER CODE END 2 */
- 
- 
-
   /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+
   while (1)
   {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
   }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -219,13 +171,6 @@ void SystemClock_Config(void)
 static void MX_I2C1_Init(void)
 {
 
-  /* USER CODE BEGIN I2C1_Init 0 */
-
-  /* USER CODE END I2C1_Init 0 */
-
-  /* USER CODE BEGIN I2C1_Init 1 */
-
-  /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
   hi2c1.Init.Timing = 0x2000090E;
   hi2c1.Init.OwnAddress1 = 0;
@@ -251,9 +196,6 @@ static void MX_I2C1_Init(void)
   {
     Error_Handler();
   }
-  /* USER CODE BEGIN I2C1_Init 2 */
-
-  /* USER CODE END I2C1_Init 2 */
 
 }
 
@@ -289,9 +231,6 @@ static void MX_GPIO_Init(void)
 
 }
 
-/* USER CODE BEGIN 4 */
-
-/* USER CODE END 4 */
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -299,10 +238,7 @@ static void MX_GPIO_Init(void)
   */
 void Error_Handler(void)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
-  /* User can add his own implementation to report the HAL error return state */
-
-  /* USER CODE END Error_Handler_Debug */
+;
 }
 
 #ifdef  USE_FULL_ASSERT
@@ -315,11 +251,7 @@ void Error_Handler(void)
   */
 void assert_failed(char *file, uint32_t line)
 { 
-  /* USER CODE BEGIN 6 */
-  /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
 }
-#endif /* USE_FULL_ASSERT */
+#endif
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
